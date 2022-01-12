@@ -41,15 +41,14 @@ out vec4 out_color;
 
 void main()
 {
-	vec3 yuv = vec3(
-		(texture(plane1, uv_var).r - (16.0 / 255.0)) / ((235.0 - 16.0) / 255.0),
-		(texture(plane2, uv_var).r - (16.0 / 255.0)) / ((240.0 - 16.0) / 255.0) - 0.5,
-		(texture(plane3, uv_var).r - (16.0 / 255.0)) / ((240.0 - 16.0) / 255.0) - 0.5);
-	vec3 rgb = mat3(
-		1.0,		1.0,		1.0,
-		0.0,		-0.21482,	2.12798,
-		1.28033,	-0.38059,	0.0) * yuv;
-	out_color = vec4(rgb, 1.0);
+	highp float y = texture2D(plane1, uv_var).r;
+	highp float u = texture2D(plane2, uv_var).r - 0.5;
+	highp float v = texture2D(plane3, uv_var).r - 0.5;
+	highp float r = y +             1.402 * v;
+	highp float g = y - 0.344 * u - 0.714 * v;
+	highp float b = y + 1.772 * u;
+
+	out_color = vec4(r,g,b,1.0);
 }
 )glsl";
 

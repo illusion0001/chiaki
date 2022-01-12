@@ -10,7 +10,7 @@ mkdir yasm && cd yasm || exit 1
 wget http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe && mv yasm-1.3.0-win64.exe yasm.exe || exit 1
 cd .. || exit 1
 
-export PATH="$PWD/ninja:$PWD/yasm:/c/Qt/5.12/msvc2017_64/bin:$PATH"
+export PATH="$PWD/ninja:$PWD/yasm:/c/Qt/5.15.2/msvc2019_64/bin:$PATH"
 
 scripts/build-ffmpeg.sh . --target-os=win64 --arch=x86_64 --toolchain=msvc || exit 1
 
@@ -26,7 +26,7 @@ ninja || exit 1
 ninja install || exit 1
 cd ../.. || exit 1
 
-wget https://mirror.firedaemon.com/OpenSSL/openssl-1.1.1l-dev.zip && 7z x openssl-1.1.1l-dev.zip || exit 1
+wget https://mirror.firedaemon.com/OpenSSL/openssl-1.1.1l.zip && 7z x openssl-1.1.1l.zip || exit 1
 
 wget https://www.libsdl.org/release/SDL2-devel-2.0.14-VC.zip && 7z x SDL2-devel-2.0.14-VC.zip || exit 1
 export SDL_ROOT="$APPVEYOR_BUILD_FOLDER/SDL2-2.0.14" || exit 1
@@ -43,8 +43,7 @@ export PATH="$PWD/protoc/bin:$PATH" || exit 1
 PYTHON="C:/Python37/python.exe"
 "$PYTHON" -m pip install protobuf || exit 1
 
-QT_PATH="C:/Qt/5.13.2/msvc2017_64"
-Qt5_INSTALL_DIR: 'C:\Qt\5.13.2\msvc2017_64'
+QT_PATH="C:/Qt/5.15.2/msvc2019_64"
 
 COPY_DLLS="$PWD/openssl-1.1/x64/bin/libcrypto-1_1-x64.dll $PWD/openssl-1.1/x64/bin/libssl-1_1-x64.dll $SDL_ROOT/lib/x64/SDL2.dll"
 
