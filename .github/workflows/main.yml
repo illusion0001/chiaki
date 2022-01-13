@@ -54,9 +54,11 @@ jobs:
           path: build/ffmpeg
           ref: release/4.4
           
+      - name: Tets
+        run: echo SRC_PATH="${env:GITHUB_WORKSPACE}\build\ffmpeg" >> $env:GITHUB_ENV
+
       - name: Build ffmpeg
         run: |
-          $SRC_PATH="${env:GITHUB_WORKSPACE}\build\ffmpeg"
           cd build/ffmpeg
           ./configure --disable-all --enable-avcodec --enable-decoder=h264 --enable-decoder=hevc --enable-hwaccel=h264_vaapi --enable-hwaccel=hevc_vaapi --target-os=win64 --arch=x86_64 --toolchain=msvc
           ls
