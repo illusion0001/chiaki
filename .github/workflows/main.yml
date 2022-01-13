@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.qtpath }}
-          key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache0
+          key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache2
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
