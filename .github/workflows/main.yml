@@ -26,14 +26,14 @@ jobs:
         uses: actions/cache@v1
         with:
           path: D:\Qt
-          key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache
+          key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache0
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
           version: ${{ env.qtver }}
-          arch: win64_mingw81
+          arch: win64_msvc2019_64
           dir: D:\Qt
           tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
 
