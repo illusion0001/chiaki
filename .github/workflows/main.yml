@@ -60,6 +60,6 @@ jobs:
           cd build/ffmpeg
           ./configure --disable-all --enable-avcodec --enable-decoder=h264 --enable-decoder=hevc --enable-hwaccel=h264_vaapi --enable-hwaccel=hevc_vaapi --target-os=win64 --arch=x86_64 --toolchain=msvc
           ls
-          make
-          make install
+          bash make
+          bash make install
           
