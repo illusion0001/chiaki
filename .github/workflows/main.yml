@@ -14,12 +14,13 @@ jobs:
       - uses: actions/checkout@v2
       
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Download ninja
         run: |
           mkdir build
           cd build
           curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip
           7z x ninja-win.zip
-          .\ninja.exe
+          echo path=${env:GITHUB_WORKSPACE}\build\ninja.exe
           
-          
+      - name: Test
+        run: ninja
