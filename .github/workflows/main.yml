@@ -35,9 +35,9 @@ jobs:
           version: ${{ env.qtver }}
           arch: win64_msvc2019_64
           dir: D:\Qt
-          tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           #bash scripts/appveyor-win.sh
+
