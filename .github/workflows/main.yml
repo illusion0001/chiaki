@@ -12,15 +12,34 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      # Runs a set of commands using the runners shell
+
+      # - name: Set Qt version
+      #   run: |
+      #     echo qtver=5.15.2 >> $env:GITHUB_ENV
+      #     echo qtpath=D:\Qt >> $env:GITHUB_ENV
+      #     echo qtarch=win64_msvc2019_64 >> $env:GITHUB_ENV
+      # - name: Cache Qt
+      #   id: cache-qt
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ${{ env.qtpath }}
+      #     key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache2
+
+      # - name: Download Qt
+      #   uses: jurplel/install-qt-action@v2
+      #   with:
+      #     cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      #     version: ${{ env.qtver }}
+      #     arch: ${{ env.qtarch }}
+      #     dir: ${{ env.qtpath }}
+
       - name: Download ninja
         run: |
           mkdir build
           cd build
           curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip
           7z x ninja-win.zip
-          echo path=${env:GITHUB_WORKSPACE}\build\ninja.exe >> $env:GITHUB_ENV
+          echo "${env:GITHUB_WORKSPACE}\build\" >> $env:GITHUB_PATH
           
       - name: Test
         run: ninja
