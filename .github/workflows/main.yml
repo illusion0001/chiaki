@@ -49,7 +49,7 @@ jobs:
           
       - name: Build ffmpeg
         run: |
-          $TAG="4.4"
+          $TAG="n4.4"
           cd build
           git clone https://git.ffmpeg.org/ffmpeg.git --depth 1 -b ${TAG}
           cd ffmpeg
