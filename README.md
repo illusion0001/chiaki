@@ -31,6 +31,6 @@ Capture Card
 ## Download
 Download the latest release from here: https://github.com/Egoistically/chiaki/releases/latest.
 
-If you want to patch it yourself, [here's the the code changed](https://github.com/Egoistically/chiaki/commit/aedb17bf445c11ac7e563f461143cba3916260f3#diff-60660f571de143f23e1f2575ee8f83df4c6a4d0712720ed41d07ad404a8f67bb) (taken from here: https://stackoverflow.com/a/13097718).
+If you want to patch it yourself, [here's the the code changed](https://github.com/Egoistically/chiaki/blob/master/gui/src/avopenglwidget.cpp#L32) (adapted from here: https://stackoverflow.com/q/55930123).
 
 Because AppVeyor updates their images every so often, some changes might need to be made in the future.
