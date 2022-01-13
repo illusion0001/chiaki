@@ -17,7 +17,27 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Set Qt version
+        run: |
+          echo qtver=5.15.2 >> $env:GITHUB_ENV
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: D:\Qt
+          key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache
+
+      - name: Download Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          version: ${{ env.qtver }}
+          arch: win64_mingw81
+          dir: D:\Qt
+          tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          bash scripts/appveyor-win.sh
+          #bash scripts/appveyor-win.sh
