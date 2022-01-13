@@ -49,9 +49,9 @@ jobs:
           
       - name: Build ffmpeg
         run: |
-          $TAG=n4.4
+          $TAG="4.4"
           cd build
-          git clone https://git.ffmpeg.org/ffmpeg.git --depth 1 -b $TAG
+          git clone https://git.ffmpeg.org/ffmpeg.git --depth 1 -b ${TAG}
           cd ffmpeg
           ./configure --disable-all --enable-avcodec --enable-decoder=h264 --enable-decoder=hevc --enable-hwaccel=h264_vaapi --enable-hwaccel=hevc_vaapi --target-os=win64 --arch=x86_64 --toolchain=msvc
           make -j8
