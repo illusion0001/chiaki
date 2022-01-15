@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "APPVEYOR_BUILD_FOLDER=$GITHUB_WORKSPACE"
+echo "APPVEYOR_BUILD_FOLDER=$APPVEYOR_BUILD_FOLDER"
 
 mkdir ninja && cd ninja || exit 1
-curl https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip && ls && 7z x ninja-win.zip || exit 1
+wget https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip && 7z x ninja-win.zip || exit 1
 cd .. || exit 1
 
 mkdir yasm && cd yasm || exit 1
-curl http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe && mv yasm-1.3.0-win64.exe yasm.exe || exit 1
+wget http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe && mv yasm-1.3.0-win64.exe yasm.exe || exit 1
 cd .. || exit 1
 
 export PATH="$PWD/ninja:$PWD/yasm:/c/Qt/5.15.2/msvc2019_64/bin:$PATH"
@@ -26,9 +26,9 @@ ninja || exit 1
 ninja install || exit 1
 cd ../.. || exit 1
 
-curl https://mirror.firedaemon.com/OpenSSL/openssl-1.1.1l.zip && 7z x openssl-1.1.1l.zip || exit 1
+wget https://mirror.firedaemon.com/OpenSSL/openssl-1.1.1l.zip && 7z x openssl-1.1.1l.zip || exit 1
 
-curl https://www.libsdl.org/release/SDL2-devel-2.0.14-VC.zip && 7z x SDL2-devel-2.0.14-VC.zip || exit 1
+wget https://www.libsdl.org/release/SDL2-devel-2.0.14-VC.zip && 7z x SDL2-devel-2.0.14-VC.zip || exit 1
 export SDL_ROOT="$APPVEYOR_BUILD_FOLDER/SDL2-2.0.14" || exit 1
 export SDL_ROOT=${SDL_ROOT//[\\]//} || exit 1
 echo "set(SDL2_INCLUDE_DIRS \"$SDL_ROOT/include\")
@@ -36,7 +36,7 @@ set(SDL2_LIBRARIES \"$SDL_ROOT/lib/x64/SDL2.lib\")
 set(SDL2_LIBDIR \"$SDL_ROOT/lib/x64\")" > "$SDL_ROOT/SDL2Config.cmake" || exit 1
 
 mkdir protoc && cd protoc || exit 1
-curl https://github.com/protocolbuffers/protobuf/releases/download/v3.9.1/protoc-3.9.1-win64.zip && 7z x protoc-3.9.1-win64.zip || exit 1
+wget https://github.com/protocolbuffers/protobuf/releases/download/v3.9.1/protoc-3.9.1-win64.zip && 7z x protoc-3.9.1-win64.zip || exit 1
 cd .. || exit 1
 export PATH="$PWD/protoc/bin:$PATH" || exit 1
 
