@@ -52,7 +52,7 @@ jobs:
           
       - name: Tets
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
           C:\msys64\usr\bin\bash -lc "cd \"%APPVEYOR_BUILD_FOLDER%\" && scripts/appveyor-win.sh"
           #echo SRC_PATH="${env:GITHUB_WORKSPACE}\build\ffmpeg" >> $env:GITHUB_ENV
 
