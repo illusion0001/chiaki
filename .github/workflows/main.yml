@@ -2,17 +2,13 @@ name: CI
 
 on: push
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  # Todo: add Android and Linux build as matrix
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # - name: Set Qt version
       #   run: |
@@ -34,34 +30,37 @@ jobs:
       #     arch: ${{ env.qtarch }}
       #     dir: ${{ env.qtpath }}
 
-      - name: Download ninja
-        run: |
-          mkdir build
-          cd build
-          curl -fLO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip
-          7z x ninja-win.zip
-          echo "${env:GITHUB_WORKSPACE}\build\" >> $env:GITHUB_PATH
+      # - name: Download ninja
+      #   run: |
+      #     mkdir build
+      #     cd build
+      #     curl -fLO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip
+      #     7z x ninja-win.zip
+      #     echo "${env:GITHUB_WORKSPACE}\build\" >> $env:GITHUB_PATH
           
-      - name: Download yasm
-        run: |
-          cd build
-          curl http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe -fLo yasm.exe
+      # - name: Download yasm
+      #   run: |
+      #     cd build
+      #     curl http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe -fLo yasm.exe
           
-      - name: Clone FFmpeg
-        uses: actions/checkout@v2
-        with:
-          repository: FFmpeg/FFmpeg
-          path: build/ffmpeg
-          ref: release/4.4
+      # - name: Clone FFmpeg
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: FFmpeg/FFmpeg
+      #     path: build/ffmpeg
+      #     ref: release/4.4
           
       - name: Tets
-        run: echo SRC_PATH="${env:GITHUB_WORKSPACE}\build\ffmpeg" >> $env:GITHUB_ENV
-
-      - name: Build ffmpeg
         run: |
-          cd build/ffmpeg
-          ./configure --disable-all --enable-avcodec --enable-decoder=h264 --enable-decoder=hevc --enable-hwaccel=h264_vaapi --enable-hwaccel=hevc_vaapi --target-os=win64 --arch=x86_64 --toolchain=msvc
-          ls
-          make Makefile
-          make install
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+          C:\msys64\usr\bin\bash -lc "cd \"%APPVEYOR_BUILD_FOLDER%\" && scripts/appveyor-win.sh"
+          #echo SRC_PATH="${env:GITHUB_WORKSPACE}\build\ffmpeg" >> $env:GITHUB_ENV
+
+      # - name: Build ffmpeg
+      #   run: |
+      #     cd build/ffmpeg
+      #     ./configure --disable-all --enable-avcodec --enable-decoder=h264 --enable-decoder=hevc --enable-hwaccel=h264_vaapi --enable-hwaccel=hevc_vaapi --target-os=win64 --arch=x86_64 --toolchain=msvc
+      #     ls
+      #     make Makefile
+      #     make install
           
